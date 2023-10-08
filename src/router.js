@@ -6,8 +6,8 @@ import HomePage from '@/views/HomePage.vue'
 const routes = [
   { path: '/vue-restapi-magic/', name: 'Home', component: HomePage },
   {
-    path: '/cards/:id',
-    name: 'Cards',
+    path: '/cards/:_id',
+    name: 'Facts',
     component: () => import('@/views/CharacterDetails.vue'),
   },
 ]

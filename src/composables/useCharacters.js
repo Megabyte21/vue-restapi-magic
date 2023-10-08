@@ -2,38 +2,16 @@
 import { ref } from 'vue'
 import useApi from '@/composables/useApi'
 
-const characters = ref([])
-const currentCharacter = ref(null)
-const firstLoad = ref(true)
+const facts = ref([])
 
 const api = useApi()
-const page = ref(1)
 
-const useCharacters = () => {
-  const fetchCharacters = async () => {
-    const { data } = await api.instance.get('/cards', {
-      params: {
-        page: page.value,
-      },
-    })
-
-    characters.value.push(...data.cards)
-    page.value++
+const useFacts = () => {
+  const fetchFacts = async () => {
+    const { data } = await api.instance.get('/facts')
+    facts.value.push(...data)
   }
-
-  const fetchCharacter = async (id) => {
-    const { data } = await api.instance.get(`/cards/${id}`)
-    currentCharacter.value = data
-    console.log(data)
-  }
-
-  return {
-    characters,
-    fetchCharacters,
-    fetchCharacter,
-    currentCharacter,
-    firstLoad,
-  }
+  return { facts, fetchFacts }
 }
 
-export default useCharacters
+export default useFacts
